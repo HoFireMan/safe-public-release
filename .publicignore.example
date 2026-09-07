@@ -1,0 +1,8 @@
+# Private repository guidance; copy this file to .publicignore.
+AGENTS.md
+CONTEXT.md
+ARCHITECTURE.md
+publication/
+private/
+notes/
+*.private.md
