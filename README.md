@@ -1,6 +1,6 @@
-# Safe Public Release V2
+# safe-public-release-skill
 
-Safe Public Release prepares a clean public candidate from a private Git repository. It is a small personal-project tool, not an enterprise release-governance system.
+Safe Public Release is a lightweight Pi Skill for preparing clean public releases from private Git repositories. It targets personal projects, not enterprise release governance. It keeps private Git history out of the public repository and uses `.publicignore` for tracked-but-private files; publication still requires explicit user approval.
 
 ## Workflow
 
@@ -15,7 +15,17 @@ private Git repository
     -> create fresh public Git history
 ```
 
-The candidate never includes private Git history. A future publication should initialize a new repository in the candidate directory rather than changing the private repository's remote or visibility.
+The candidate never includes private Git history. An authorized publication initializes a new repository in the candidate directory rather than changing the private repository's remote or visibility.
+
+## Pi Skill
+
+`SKILL.md` is the Pi agent instruction entry point. The Global Skill name is `safe-public-release`, installed at:
+
+```text
+~/.pi/agent/skills/safe-public-release
+```
+
+The GitHub project is named `safe-public-release-skill` so visitors can identify it as a Skill. The internal Pi Skill name and installation path intentionally remain `safe-public-release` for compatibility.
 
 ## `.gitignore` and `.publicignore`
 
@@ -37,7 +47,7 @@ python scripts/prepare_public.py --output /tmp/my-project-public
 
 The command requires a clean working tree, records and prints `SOURCE_HEAD`, rejects an existing destination, copies selected tracked regular files, prints the final inventory, and blocks obvious sensitive filenames such as `.env`, `*.pem`, `*.key`, credentials files, and secret directories.
 
-Run the project's tests from the candidate when practical. Before any public repository is created, pushed, or exposed, show the candidate inventory, test result, and source HEAD, then obtain explicit user approval for that publication action. A prepared candidate and passing tests are not approval.
+Run the project's tests from the candidate when practical. Before any later public repository is created, pushed, or exposed, show the candidate inventory, test result, and source HEAD, then obtain explicit user approval for that publication action. A prepared candidate and passing tests are not approval.
 
 If the requested public target already exists, stop and ask the user. Never overwrite, adopt unknown history, delete, or force-push it automatically.
 
@@ -47,4 +57,4 @@ MIT License. Copyright (c) 2026 HoFireMan.
 
 ## Limitations
 
-V2 does not create repositories, push, change visibility, publish releases, or install itself globally. It does not implement a provider API, a publication state machine, a secret-management framework, or a full Git-ignore parser. The current task creates only a private checkpoint; public publication remains a separate explicit action.
+V2 does not automatically create repositories, push, change visibility, publish releases, or install itself globally. It does not implement a provider API, a publication state machine, a secret-management framework, or a full Git-ignore parser.

@@ -1,6 +1,6 @@
 ---
 name: safe-public-release
-description: Prepare a clean public candidate from a private Git repository for an individual developer.
+description: Lightweight Pi Skill for preparing clean public releases from private Git repositories.
 ---
 
 # Safe Public Release V2
